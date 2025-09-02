@@ -1,5 +1,5 @@
-import React from "react";
-import { useState } from 'react'
+import React, { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 
 const WORKOUTS = [
   { id: 1, name: 'Jumping Jacks', duration: 5, level: 'Easy', equipment: 'None' },
@@ -11,7 +11,15 @@ const WORKOUTS = [
 
 export default function Workouts() {
   const [duration, setDuration] = useState('all')
+  const navigate = useNavigate()
   const filtered = WORKOUTS.filter(w => duration === 'all' || String(w.duration) === duration)
+
+  const startSession = (mins, seed) => {
+    const params = new URLSearchParams()
+    params.set('mins', String(mins))
+    if (seed) params.set('seed', seed) // für „KI“-Mock zum Mischen
+    navigate(`/session?${params.toString()}`)
+  }
 
   return (
     <div className="space-y-6">
@@ -32,7 +40,14 @@ export default function Workouts() {
           <option value="10">10 Minuten</option>
           <option value="20">20 Minuten</option>
         </select>
-        <button className="ml-auto px-4 py-2 rounded-xl bg-slate-900 text-white">KI-Workout (bald)</button>
+
+        <button
+          className="ml-auto px-4 py-2 rounded-xl bg-slate-900 text-white"
+          onClick={() => startSession(duration === 'all' ? 10 : Number(duration), 'ai-mock')}
+          title="KI-Workout (Mock): generiert automatisch einen passenden Plan"
+        >
+          KI-Workout (bald)
+        </button>
       </div>
 
       <ul className="grid grid-cols-1 sm:grid-cols-2 gap-3">
@@ -43,7 +58,12 @@ export default function Workouts() {
                 <h3 className="font-semibold">{w.name}</h3>
                 <p className="text-sm text-slate-600">{w.duration} Min • {w.level} • {w.equipment}</p>
               </div>
-              <button className="px-3 py-1 rounded-lg bg-slate-900 text-white text-sm">Start</button>
+              <button
+                className="px-3 py-1 rounded-lg bg-slate-900 text-white text-sm"
+                onClick={() => startSession(w.duration)}
+              >
+                Start
+              </button>
             </div>
           </li>
         ))}

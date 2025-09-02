@@ -5,6 +5,7 @@ import Workouts from './pages/Workouts'
 import Nutrition from './pages/Nutrition'
 import Packlists from './pages/Packlists'
 import Logo from './components/Logo'
+import WorkoutSession from './pages/WorkoutSession'
 
 export default function App() {
   return (
@@ -44,6 +45,7 @@ export default function App() {
           <Route path="/workouts" element={<Workouts />} />
           <Route path="/nutrition" element={<Nutrition />} />
           <Route path="/packlists" element={<Packlists />} />
+          <Route path="/session" element={<WorkoutSession />} />
         </Routes>
       </main>
 
