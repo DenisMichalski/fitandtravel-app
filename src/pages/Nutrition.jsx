@@ -1,4 +1,3 @@
-import React from "react";
 const ITEMS = [
   { id: 1, title: 'Reise-Snack: Nüsse & Beeren', type: 'Snack' },
   { id: 2, title: 'Meal-Prep: Overnight Oats', type: 'Meal-Prep' },

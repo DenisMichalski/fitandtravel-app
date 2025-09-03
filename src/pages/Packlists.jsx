@@ -1,4 +1,3 @@
-import React from "react";
 import { useMemo, useState } from 'react'
 
 const BASE = ["T-Shirts", "Shorts", "Laufschuhe", "Trinkflasche"]
